@@ -60,7 +60,7 @@
                                 </tr>
                                 <tr>
                                     <th>Long Description</th>
-                                    <td>{{ $product->long_description }}</td>
+                                    <td>{!!$product->long_description!!}</td>
                                 </tr>
                                 <tr>
                                     <th>Feature Image</th>
