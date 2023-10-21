@@ -71,12 +71,14 @@
                                     <label class="col-md-3">Email Address</label>
                                     <div class="col-md-9">
                                         <input type="email" name="email" class="form-control"/>
+                                        <span class="text-danger">{{$errors->has('email') ? $errors->first('email') : ''}}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-md-3">Mobile Number</label>
                                     <div class="col-md-9">
                                         <input type="number" name="mobile" class="form-control"/>
+                                        <span class="text-danger">{{$errors->has('mobile') ? $errors->first('mobile') : ''}}</span>
                                     </div>
                                 </div>
                                 <div class="row mb-3">

@@ -108,7 +108,119 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="tab-pane fade show active" id="online">
+                            <div class="tab-pane fade show px-3 my-2" id="online">
+                                <form action="{{ url('/pay') }}" method="POST" class="needs-validation">
+                                    <input type="hidden" value="{{ csrf_token() }}" name="_token" />
+                                    <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <label for="firstName">Full name</label>
+                                            {{-- @if (isset($customer->id))
+                                            <input type="text" name="name" class="form-control" id="customer_name" placeholder=""
+                                                value="{{$customer->name}}" readonly required>
+                                            @else --}}
+                                            <input type="text" name="name" class="form-control" id="customer_name" placeholder="Your Name"
+                                                required/>
+                                            {{-- @endif --}}
+                                            <div class="invalid-feedback">
+                                                Valid customer name is required.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="mobile">Mobile</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">+88</span>
+                                            </div>
+                                            {{-- @if (isset($customer->id))
+                                            <input type="text" name="mobile" class="form-control" id="mobile" placeholder="Mobile"
+                                                value="{{$customer->mobile}}" readonly required>
+                                            @else --}}
+                                            <input type="number" name="mobile" class="form-control" id="mobile" placeholder="Mobile"
+                                                 required/>
+                                            {{-- @endif --}}
+                                            <div class="invalid-feedback" style="width: 100%;">
+                                                Your Mobile number is required.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="email">Email</label>
+                                        {{-- @if (isset($customer->id))
+                                        <input type="email" name="email" class="form-control" id="email"
+                                             value="{{$customer->email}}" readonly required>
+                                        @else --}}
+                                        <input type="email" name="email" class="form-control" id="email"
+                                            placeholder="you@example.com" required/>
+                                        {{-- @endif --}}
+                                        <div class="invalid-feedback">
+                                            Please enter a valid email address for shipping updates.
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="address">Address</label>
+                                        {{-- @if (isset($customer->id))
+                                        <textarea name="delivery_address" class="form-control" id="address" placeholder="Delivery Address"
+                                            value="{{$customer->address}}" readonly required></textarea>
+                                        @else --}}
+                                        <textarea name="delivery_address" class="form-control" id="address" placeholder="Delivery Address"
+                                             required></textarea>
+                                        {{-- @endif --}}
+                                        <div class="invalid-feedback">
+                                            Please enter your shipping address.
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-5 mb-3">
+                                            <label for="country">Country</label>
+                                            <select class="custom-select d-block w-100 form-control" id="country" required>
+                                                <option value="">Choose...</option>
+                                                <option value="Bangladesh">Bangladesh</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Please select a valid country.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label for="state">State</label>
+                                            <select class="custom-select d-block w-100 form-control" id="state" required>
+                                                <option value="">Choose...</option>
+                                                <option value="Dhaka">Dhaka</option>
+                                            </select>
+                                            <div class="invalid-feedback">
+                                                Please provide a valid state.
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="zip">Zip</label>
+                                            <input type="text" class="form-control" id="zip" placeholder="" required>
+                                            <div class="invalid-feedback">
+                                                Zip code required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="single-form form-default">
+                                            <label>Payment Type</label>
+                                            <div class="input-group">
+                                                <label><input type="radio" name="payment_type" value="2" checked> Online</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="single-checkbox checkbox-style-3">
+                                            <input type="checkbox" id="checkbox-33" checked>
+                                            <label for="checkbox-33"><span></span></label>
+                                            <p>I accept all terms and conditions</p>
+                                        </div>
+                                    </div>
+                                    <hr class="mb-4">
+                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                                </form>
                             </div>
                         </div>
                     </div>
