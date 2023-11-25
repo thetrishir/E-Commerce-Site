@@ -22,7 +22,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                                 @foreach ($categories as $category)
                                     <tr>
                                         <td>{{ $category->id }}</td>

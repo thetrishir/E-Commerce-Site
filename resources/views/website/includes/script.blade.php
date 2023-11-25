@@ -5,7 +5,91 @@
 <script src="{{ asset('/') }}website/assets/js/main.js"></script>
 <script src="{{ asset('/') }}website/assets/js/xzoom.min.js"></script>
 <script src="{{ asset('/') }}website/assets/js/setup.js"></script>
+
 <script type="text/javascript">
+
+    // $('#email').blur(function(){
+    //     var email = $(this).val();
+    //     console.log(email);
+    // });
+
+    function checkCustomerEmail(email) {
+        // console.log(email);
+        $.ajax({
+            type: "GET",
+            // url: {{url('/customer-email-check')}},
+            url: "{{route('customer-email-check')}}",
+            data: {email: email},
+            dataType: "json",
+            success: function(response){
+                // console.log(response);
+                $('#customerEmailError').text(response.message);
+                if(response.success == false) {
+                    $('#confirmBtn').prop('disabled',true);
+                }
+                else{
+                    $('#confirmBtn').prop('disabled',false);
+                }
+            }
+        });
+    }
+
+
+    $('#searchInput').keyup(function(){
+        var searchText = $(this).val();
+        $.ajax({
+            type: "GET",
+            url: "{{route('ajax-search-product')}}",
+            data: {searchKey: searchText},
+            dataType: "json",
+            success: function(response){
+                console.log(response);
+                // $('#customerEmailError').text(response.message);
+                var div = '';
+
+                div += '<section class="trending-product section">';
+                    div += '<div class="container">';
+                        div += '<div class="row">';
+                            if(response.length > 0)
+                            {
+                                $.each(response, function (key, value) {
+                                    div += '<div class="col-lg-3 col-md-6 col-12">';
+                                        div += '<div class="single-product">';
+                                            div += '<div class="product-image">';
+                                                div += '<img src="'+value.image+'" alt="#">';
+                                                div += '<div class="button">';
+                                                    div += '<a href="" class="btn"><i class="lni lni-cart"></i> Add to Cart</a>';
+                                                div += '</div>';
+                                            div += '</div>';
+                                            div += '<div class="product-info">';
+                                                div += '<span class="category">{{$product->category->name}}</span>';
+                                                div += '<h4 class="title">';
+                                                    div += '<a href="{{route('product-detail', ['id'=> $product->id])}}">'+value.name+'</a>';
+                                                div += '</h4>';
+                                                div += '<div class="price">';
+                                                    div += '<span>'+value.selling_price+'</span>';
+                                                div += '</div>';
+                                            div += '</div>';
+                                        div += '</div>';
+                                    div += '</div>';
+                                })
+                            }
+                            else
+                            {
+                                div += '<div class="col-12"><h1>Sorry nothing found</h1></div>';
+                            }
+                        div += '</div>';
+                    div += '</div>';
+                div += '</section>';
+
+                $('#ajaxResult').empty();
+                $('#ajaxResult').append(div);
+            }
+        });
+    });
+
+
+
     //========= Hero Slider
     tns({
         container: '.hero-slider',
@@ -75,4 +159,4 @@
     }
     timer();
     setInterval(timer, 1000);
-</script>
+</scrip>

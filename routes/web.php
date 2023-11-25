@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminOrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
@@ -31,6 +32,7 @@ use App\Http\Controllers\SslCommerzPaymentController;
 
 
 Route::get('/', [MyCommerceController::class, 'index'])->name('home');
+Route::get('/ajax-search-product', [MyCommerceController::class, 'ajaxSearch'])->name('ajax-search-product');
 Route::get('/product-category/{id}', [MyCommerceController::class, 'category'])->name('product-category');
 Route::get('/product-detail/{id}', [MyCommerceController::class, 'detail'])->name('product-detail');
 Route::post('/add-to-cart/{id}', [CartController::class, 'index'])->name('add-to-cart');
@@ -38,6 +40,7 @@ Route::get('/show-cart', [CartController::class, 'show'])->name('show-cart');
 Route::get('/remove-cart-product/{id}', [CartController::class, 'remove'])->name('remove-cart-product');
 Route::post('/update-cart-product/{id}', [CartController::class, 'update'])->name('update-cart-product');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
+Route::get('/customer-email-check', [CheckoutController::class, 'checkCustomerEmail'])->name('customer-email-check');
 Route::post('/new-cash-order', [CheckoutController::class, 'newCashOrder'])->name('new-cash-order');
 Route::get('/complete-order', [CheckoutController::class, 'completeOrder'])->name('complete-order');
 
@@ -55,7 +58,7 @@ Route::middleware(['customer'])->group(function(){
     Route::get('/customer-password', [CustomerAuthController::class, 'password'])->name('customer.password');
 });
 
- 
+
 
 
 // SSLCOMMERZ Start
@@ -72,8 +75,6 @@ Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
 Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 //SSLCOMMERZ END
 
-
-// class 18
 
 
 
@@ -112,8 +113,19 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/product/get_subcategory_by_category', [ProductController::class, 'getSubCategoryByCategory'])->name('product.get_subcategory_by_category');
     Route::get('/product/manage', [ProductController::class, 'manage'])->name('product.manage');
     Route::post('/product/new', [ProductController::class, 'create'])->name('product.new');
-    Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
     Route::get('/product/detail/{id}', [ProductController::class, 'detail'])->name('product.detail');
     Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
     Route::post('/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+
+    Route::get('/admin/all-order', [AdminOrderController::class, 'index'])->name('admin.all-order');
+    Route::get('/admin/order-detail/{id}', [AdminOrderController::class, 'detail'])->name('admin.order-detail');
+    Route::get('/admin/order-edit/{id}', [AdminOrderController::class, 'edit'])->name('admin.order-edit');
+    Route::post('/admin/update-order/{id}', [AdminOrderController::class, 'update'])->name('admin.update-order');
+    Route::get('/admin/order-invoice/{id}', [AdminOrderController::class, 'showInvoice'])->name('admin.order-invoice');
+    Route::get('/admin/order-print-invoice/{id}', [AdminOrderController::class, 'printInvoice'])->name('admin.order-print-invoice');
+    Route::get('/admin/order-delete/{id}', [AdminOrderController::class, 'delete'])->name('admin.order-delete');
 });
+
+
+// class 32 min 41

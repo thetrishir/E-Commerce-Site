@@ -125,7 +125,7 @@
                                 </div>
                             </div>
                             <div class="search-input">
-                                <input type="text" placeholder="Search">
+                                <input type="text" placeholder="Search" id="searchInput">
                             </div>
                             <div class="search-btn">
                                 <button><i class="lni lni-search-alt"></i></button>

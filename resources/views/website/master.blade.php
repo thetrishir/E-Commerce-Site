@@ -12,10 +12,11 @@
 <body>
 
     @include('website.includes.header')
+    
 
-
-    @yield('body')
-
+    <div id="ajaxResult">
+        @yield('body')
+    </div>
 
 
     @include('website.includes.footer')

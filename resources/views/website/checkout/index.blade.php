@@ -57,8 +57,10 @@
                                                     @if (isset($customer->id))
                                                     <input type="email" name="email" value="{{$customer->email}}" readonly required placeholder="Email Address">
                                                     @else
-                                                    <input type="email" name="email" required placeholder="Email Address">
-                                                    <span class="text-danger">{{$errors->has('email') ? $errors->first('email') : ''}}</span>
+                                                    {{-- <input type="email" name="email" required placeholder="Email Address" id="email"> --}}
+                                                    {{-- <span class="text-danger">{{$errors->has('email') ? $errors->first('email') : ''}}</span> --}}
+                                                    <input type="email" name="email" onblur="checkCustomerEmail(this.value)" required placeholder="Email Address">
+                                                    <span class="text-danger" id="customerEmailError"></span>
                                                     @endif
                                                 </div>
                                             </div>
@@ -70,7 +72,7 @@
                                                     @if (isset($customer->id))
                                                     <input type="number" name="mobile" value="{{$customer->mobile}}" readonly required placeholder="Phone Number">
                                                     @else
-                                                    <input type="number" name="mobile" required placeholder="Phone Number">
+                                                    <input type="number" name="mobile" required placeholder="Phone Number"  id="mobile">
                                                     <span class="text-danger">{{$errors->has('mobile') ? $errors->first('mobile') : ''}}</span>
                                                     @endif
                                                 </div>
@@ -102,7 +104,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="single-form button">
-                                                <button class="btn" type="submit">Confirm Order</button>
+                                                <button class="btn" id="confirmBtn" type="submit">Confirm Order</button>
                                             </div>
                                         </div>
                                     </div>

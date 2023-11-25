@@ -12,7 +12,8 @@ class Order extends Model
 
     private static $order;
 
-    public static function newOrder($request, $customerId){
+    public static function newOrder($request, $customerId)
+    {
 
         self::$order = new Order();
         self::$order->customer_id = $customerId;
@@ -25,5 +26,22 @@ class Order extends Model
         self::$order->payment_type = $request->payment_type;
         self::$order->save();
         return self::$order;
+    }
+
+    public static function deleteOrder($id)
+    {
+        self::$order = Order::find($id);
+        OrderDetail::deleteOrderDetail($id);
+        self::$order->delete();
+    }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
     }
 }

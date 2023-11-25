@@ -13,6 +13,7 @@ use Session;
 
 class SslCommerzPaymentController extends Controller
 {
+    private $customer;
 
     public function exampleEasyCheckout()
     {
@@ -200,7 +201,7 @@ class SslCommerzPaymentController extends Controller
         $order_details = DB::table('orders')
             ->where('transaction_id', $tran_id)
             ->select('transaction_id', 'order_status', 'currency', 'order_total')->first();
-            
+
 
         if ($order_details->order_status == 'Pending') {
             $validation = $sslc->orderValidate($request->all(), $tran_id, $amount, $currency);

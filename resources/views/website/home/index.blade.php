@@ -225,8 +225,7 @@
                         <div class="product-image">
                             <img src="{{ asset($product->image) }}" alt="#">
                             <div class="button">
-                                <a href="" class="btn"><i class="lni lni-cart"></i> Add to
-                                    Cart</a>
+                                <a href="" class="btn"><i class="lni lni-cart"></i> Add to Cart</a>
                             </div>
                         </div>
                         <div class="product-info">

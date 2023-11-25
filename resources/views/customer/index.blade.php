@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="card">
-                        <div class="card-header"><h4>Login Form</h4></div>
+                        <div class="card-header"><h4>Registration Form</h4></div>
                         <div class="card-body">
                             <form action="{{route('customer.register')}}" method="POST">
                             @csrf

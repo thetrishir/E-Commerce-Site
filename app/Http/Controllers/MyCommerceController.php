@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 
 class MyCommerceController extends Controller
 {
+    private $key, $products;
+
     public function index()
     {
         return view('website.home.index', [
@@ -25,5 +27,17 @@ class MyCommerceController extends Controller
     public function detail($id)
     {
         return view('website.detail.index',['product' => Product::find($id)]);
+    }
+
+    public function ajaxSearch()
+    {
+        $this->key =$_GET['searchKey'];
+        $this->products = Product::where('name', 'like', "%{$this->key}%")->get(['id', 'category_id', 'name', 'selling_price', 'image']);
+        foreach($this->products as $product)
+        {
+            $product->image = asset($product->image);
+            $product->category_name = $product->category->name;
+        }
+        return response()->json($this->products);
     }
 }
